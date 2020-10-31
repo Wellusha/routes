@@ -2,7 +2,7 @@ package ru.mai.lab.routes.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.mai.lab.routes.config.RouteMapConfig;
+import ru.mai.lab.routes.config.RouteMapGeneratorConfig;
 import ru.mai.lab.routes.entity.Atm;
 import ru.mai.lab.routes.entity.RouteMap;
 import ru.mai.lab.routes.util.RandomUtil;
@@ -15,13 +15,13 @@ import java.util.Map;
 @Service
 public class RouteMapGeneratorService extends BaseGeneratorService<RouteMap> {
 
-    private final RouteMapConfig config;
+    private final RouteMapGeneratorConfig config;
 
     private final List<Atm> atms = new ArrayList<>();
     private final Map<Atm, Boolean> atmsStatuses = new HashMap<>();
 
     @Autowired
-    public RouteMapGeneratorService(RouteMapConfig config, AtmGeneratorService atmGenerator) {
+    public RouteMapGeneratorService(RouteMapGeneratorConfig config, AtmGeneratorService atmGenerator) {
         this.config = config;
 
         initAtms(atmGenerator);

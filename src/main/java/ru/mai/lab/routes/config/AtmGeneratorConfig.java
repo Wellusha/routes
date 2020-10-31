@@ -7,15 +7,15 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "app.route-map")
+@ConfigurationProperties(prefix = "app.generator.atm")
 @Data
-public class RouteMapConfig {
+public class AtmGeneratorConfig {
 
-    private static final int DEFAULT_ATM_COUNT = 1000;
-    private static final int DEFAULT_ROUTES_COUNT = DEFAULT_ATM_COUNT / 2;
+    private static final int DEFAULT_MIN_IN = 100;
+    private static final int DEFAULT_MAX_IN = 500;
 
-    private static final int DEFAULT_MIN_DISTANCE = 1000;
-    private static final int DEFAULT_MAX_DISTANCE = 5000;
+    private static final int DEFAULT_MIN_OUT = 100;
+    private static final int DEFAULT_MAX_OUT = 500;
 
     private static final double DEFAULT_MIN_EXPECTED = 1;
     private static final double DEFAULT_MAX_EXPECTED = 2;
@@ -23,11 +23,11 @@ public class RouteMapConfig {
     private static final double DEFAULT_MIN_DISPERSION = 0.5;
     private static final double DEFAULT_MAX_DISPERSION = 1;
 
-    private Integer atmCount;
-    private Integer routesCount;
+    private Integer minIn;
+    private Integer maxIn;
 
-    private Integer minDistance;
-    private Integer maxDistance;
+    private Integer minOut;
+    private Integer maxOut;
 
     private Double minExpected;
     private Double maxExpected;
@@ -35,20 +35,20 @@ public class RouteMapConfig {
     private Double minDispersion;
     private Double maxDispersion;
 
-    public Integer getAtmCount() {
-        return atmCount != null ? atmCount : DEFAULT_ATM_COUNT;
+    public Integer getMinIn() {
+        return minIn != null ? minIn : DEFAULT_MIN_IN;
     }
 
-    public Integer getRoutesCount() {
-        return routesCount != null ? routesCount : DEFAULT_ROUTES_COUNT;
+    public Integer getMaxIn() {
+        return maxIn != null ? maxIn : DEFAULT_MAX_IN;
     }
 
-    public Integer getMinDistance() {
-        return minDistance != null ? minDistance : DEFAULT_MIN_DISTANCE;
+    public Integer getMinOut() {
+        return minOut != null ? minOut : DEFAULT_MIN_OUT;
     }
 
-    public Integer getMaxDistance() {
-        return maxDistance != null ? maxDistance : DEFAULT_MAX_DISTANCE;
+    public Integer getMaxOut() {
+        return maxOut != null ? maxOut : DEFAULT_MAX_OUT;
     }
 
     public Double getMinExpected() {

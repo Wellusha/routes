@@ -5,8 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
-import ru.mai.lab.routes.config.CollectorConfig;
-import ru.mai.lab.routes.config.RouteMapConfig;
+import ru.mai.lab.routes.config.CollectorGeneratorConfig;
+import ru.mai.lab.routes.config.RouteMapGeneratorConfig;
 import ru.mai.lab.routes.service.CollectorService;
 import ru.mai.lab.routes.service.RouteMapService;
 import ru.mai.lab.routes.service.impl.CollectorGeneratorService;
@@ -16,9 +16,9 @@ import ru.mai.lab.routes.service.impl.RouteMapGeneratorService;
 public class Application {
 
     @Autowired
-    private CollectorConfig collectorConfig;
+    private CollectorGeneratorConfig collectorGeneratorConfig;
     @Autowired
-    private RouteMapConfig routeMapConfig;
+    private RouteMapGeneratorConfig routeMapGeneratorConfig;
 
     @Autowired
     private CollectorService collectorService;
@@ -32,8 +32,8 @@ public class Application {
 
     @EventListener(ApplicationReadyEvent.class)
     public void init() {
-        collectorService.saveAll(collectorGenerator.generate(collectorConfig.getCount()));
-        routeMapService.saveAll(routeMapGenerator.generate(routeMapConfig.getRoutesCount()));
+        collectorService.saveAll(collectorGenerator.generate(collectorGeneratorConfig.getCount()));
+        routeMapService.saveAll(routeMapGenerator.generate(routeMapGeneratorConfig.getRoutesCount()));
     }
 
     public static void main(String[] args) {

@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "app.collector")
+@ConfigurationProperties(prefix = "app.generator.collector")
 @Data
-public class CollectorConfig {
+public class CollectorGeneratorConfig {
 
     private static final int DEFAULT_COUNT = 5;
 

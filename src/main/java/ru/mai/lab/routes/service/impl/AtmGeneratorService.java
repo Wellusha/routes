@@ -2,17 +2,17 @@ package ru.mai.lab.routes.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.mai.lab.routes.config.AtmConfig;
+import ru.mai.lab.routes.config.AtmGeneratorConfig;
 import ru.mai.lab.routes.entity.Atm;
 import ru.mai.lab.routes.util.RandomUtil;
 
 @Service
 public class AtmGeneratorService extends BaseGeneratorService<Atm> {
 
-    private final AtmConfig config;
+    private final AtmGeneratorConfig config;
 
     @Autowired
-    public AtmGeneratorService(AtmConfig config) {
+    public AtmGeneratorService(AtmGeneratorConfig config) {
         this.config = config;
     }
 
