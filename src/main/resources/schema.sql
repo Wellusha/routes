@@ -1,36 +1,37 @@
-CREATE TABLE atms
+CREATE TABLE IF NOT EXISTS atms -- таблица банкоматов
 (
-    id         INT PRIMARY KEY,
-    out        INT    NOT NULL,
-    in         INT    NOT NULL,
-    expected   DOUBLE NOT NULL,
-    dispersion DOUBLE NOT NULL
+    id         INT AUTO_INCREMENT PRIMARY KEY, -- идентификатор банкомата
+    out        INT    NOT NULL,                -- количество банкнот для извлечения
+    in         INT    NOT NULL,                -- количество банкнот для поступления
+    expected   DOUBLE NOT NULL,                -- мат.ожидание извлекаемых/поступаемых банкнот
+    dispersion DOUBLE NOT NULL                 -- дисперсия извлекаемых/поступаемых банкнот
 );
 
-CREATE TABLE route_maps
+CREATE TABLE IF NOT EXISTS route_maps -- таблица перемещений
 (
-    id               INT AUTO_INCREMENT PRIMARY KEY,
-    atm_one          INT NOT NULL,
-    atm_two          INT NOT NULL,
-    -- Будем считать в метрах
-    distance_between INT NOT NULL
+    id         INT AUTO_INCREMENT PRIMARY KEY, -- идентификатор перемещения между банкоматами
+    atm_one    INT    NOT NULL,                -- идентификатор первого банкомата
+    atm_two    INT    NOT NULL,                -- идентификатор второго банкомата
+    distance   INT    NOT NULL,                -- расстояние между банкоматами
+    expected   DOUBLE NOT NULL,                -- мат.ожидание времени перемещения между банкоматами
+    dispersion DOUBLE NOT NULL                 -- дисперсия времени перемещения между банкоматами
 );
 
--- Предположим, что один инкассатор - это группа инкассаторов на одной машине
-CREATE TABLE collectors
+CREATE TABLE IF NOT EXISTS collectors -- таблица групп инкасаторов
 (
-    id INT PRIMARY KEY
+    id INT AUTO_INCREMENT PRIMARY KEY -- идентификатор группы инкасаторов
 );
 
-CREATE TABLE routes
+CREATE TABLE IF NOT EXISTS routes -- таблица маршрутов
 (
-    id        INT AUTO_INCREMENT PRIMARY KEY,
-    day       INT NOT NULL,
-    collector INT NOT NULL,
-    atm_from  INT NOT NULL,
-    atm_to    INT NOT NULL
+    id        INT AUTO_INCREMENT PRIMARY KEY, -- идентификатор маршрута
+    day       INT NOT NULL,                   -- идентификатор дня
+    collector INT NOT NULL,                   -- идентификатор группы инкасаторов
+    atm_from  INT NOT NULL,                   -- идентификатор первого банкомата
+    atm_to    INT NOT NULL                    -- идентификатор второго банкомата
 );
 
+-- ограничения на внешние ключи
 ALTER TABLE route_maps
     ADD CONSTRAINT fk_atm_one FOREIGN KEY (atm_one) REFERENCES atms (id);
 ALTER TABLE route_maps
@@ -42,25 +43,6 @@ ALTER TABLE routes
 ALTER TABLE routes
     ADD CONSTRAINT fk_atm_to FOREIGN KEY (atm_to) REFERENCES atms (id);
 
-
--- Пять групп инкассаторов
-INSERT INTO collectors(id)
-VALUES (1),
-       (2),
-       (3),
-       (4),
-       (5);
-
 -- Костыль - банкомат с индексом 0 является условным офисом
 INSERT INTO atms(id, out, in, expected, dispersion)
 VALUES (0, 0, 0, 0, 0);
-
--- Банкоматы для теста, значения от балды
-INSERT INTO atms(id, out, in, expected, dispersion)
-VALUES (1, 100, 100, 100, 10),
-       (2, 100, 100, 100, 10);
-
-INSERT INTO route_maps(atm_one, atm_two, distance_between)
-VALUES (1, 2, 500),
-       (1, 0, 1000),
-       (2, 0, 700);

@@ -9,3 +9,9 @@ spring:
   h2:
     console:
       enabled: true
+
+app:
+  route-map:
+    atmCount: 1000
+  collector:
+    count: 5
