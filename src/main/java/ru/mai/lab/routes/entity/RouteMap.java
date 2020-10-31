@@ -1,18 +1,16 @@
 package ru.mai.lab.routes.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "route_maps")
+@Data
 public class RouteMap {
+
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -24,6 +22,13 @@ public class RouteMap {
     @JoinColumn(name = "atm_two")
     private Atm atmTwo;
 
-    @Column(name = "distance_between")
+    @Column(name = "distance")
     private Integer distance;
+
+    @Column(name = "expected")
+    private Double expected;
+
+    @Column(name = "dispersion")
+    private Double dispersion;
+
 }
