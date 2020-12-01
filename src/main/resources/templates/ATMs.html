@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<meta charset="utf8">
+	
+
+	<head>
+		<title>Список банкоматов</title>
+	</head>
+	
+	
+	<body>
+	
+	
+		<header>
+			<h1 align="center">Банкоматы</h1>
+		</header>
+		
+		
+		<nav>
+			<table align="center" border="1">
+				<tr>
+					<td><a href="http://localhost:8080/collectors">Список инкассаторов</a></td>
+					<td><a href="http://localhost:8080/paths">Список путей</a></td>
+				</tr>
+			</table>
+		</nav>
+		
+		
+		<article>
+		<h1 align="left">Список банкоматов:</h1> <br />
+		<section>
+            <table border="1">
+                <tr>
+                    <td>id</td>
+                    <td>out</td>
+                    <td>in</td>
+                    <td>expected</td>
+                    <td>dispersion</td>
+                </tr>
+                <tr>
+                    <td th:text="'some text'">...</td>
+                    <td th:text="'some text'">...</td>
+                    <td th:text="'some text'">...</td>
+                    <td th:text="'some text'">...</td>
+                    <td th:text="'some text'">...</td>
+                </tr>
+            </table>
+		</section>
+		<aside>
+		</aside>
+		</article>
+		
+		<footer>
+            <hr color="black">
+		</footer>
+		
+	</body>
+	
+</html>

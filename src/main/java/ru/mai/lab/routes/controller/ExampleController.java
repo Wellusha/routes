@@ -14,4 +14,18 @@ public class ExampleController {
         return "example";
     }
 
+    @GetMapping("/atms")
+    public String atms() {
+        return "ATMs";
+    }
+
+    @GetMapping("/collectors")
+    public String collectors() {
+        return "Collectors";
+    }
+
+    @GetMapping("/paths")
+    public String paths() {
+        return "Paths";
+    }
 }
