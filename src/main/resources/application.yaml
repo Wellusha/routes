@@ -16,3 +16,5 @@ app:
       atmCount: 1000
     collector:
       count: 5
+server:
+  port: 8081
