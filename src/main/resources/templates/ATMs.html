@@ -5,7 +5,7 @@
 	
 
 	<head>
-		<title>Список банкоматов</title>
+		<title>Банкоматы</title>
 	</head>
 	
 	
@@ -22,6 +22,7 @@
 				<tr>
 					<td><a href="http://localhost:8080/collectors">Список инкассаторов</a></td>
 					<td><a href="http://localhost:8080/paths">Список путей</a></td>
+					<td><a href="http://localhost:8080/maps">Список карт</a></td>
 				</tr>
 			</table>
 		</nav>
@@ -38,12 +39,12 @@
                     <td>expected</td>
                     <td>dispersion</td>
                 </tr>
-                <tr>
-                    <td th:text="'some text'">...</td>
-                    <td th:text="'some text'">...</td>
-                    <td th:text="'some text'">...</td>
-                    <td th:text="'some text'">...</td>
-                    <td th:text="'some text'">...</td>
+                <tr th:each = "Atm : ${atms}">
+                    <td th:utext="${Atm.id}">...</td>
+                    <td th:utext="${Atm.in}">...</td>
+                    <td th:utext="${Atm.out}">...</td>
+                    <td th:utext="${Atm.expected}">...</td>
+                    <td th:utext="${Atm.dispersion}">...</td>
                 </tr>
             </table>
 		</section>

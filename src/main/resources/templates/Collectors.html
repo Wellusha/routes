@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">	
 	<head>
-		<title>Список инкассаторов</title>
+		<title>Инкассаторы</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	</head>
 	
@@ -19,6 +19,7 @@
 				<tr>
 					<td><a href="http://localhost:8080/atms">Список банкоматов</a></td>
 					<td><a href="http://localhost:8080/paths">Список путей</a></td>
+					<td><a href="http://localhost:8080/maps">Список карт</a></td>
 				</tr>
 			</table>
 		</nav>
@@ -31,8 +32,8 @@
                 <tr>
                     <td>id</td>
                 </tr>
-                <tr>
-                    <td th:text="'some text'">...</td>
+                <tr th:each = "Collector : ${collectors}">
+                    <td th:utext="${Collector.id}">...</td>
                 </tr>
             </table>
 		</section>

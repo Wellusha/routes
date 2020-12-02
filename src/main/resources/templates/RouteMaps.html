@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<meta charset="utf8">
+
+
+<head>
+    <title>Карты путей</title>
+</head>
+
+
+<body>
+
+
+<header>
+    <h1 align="center">Карты Путей</h1>
+</header>
+
+
+<nav>
+    <table align="center" border="1">
+        <tr>
+            <td><a href="http://localhost:8080/atms">Список банкоматов</a></td>
+            <td><a href="http://localhost:8080/collectors">Список инкассаторов</a></td>
+            <td><a href="http://localhost:8080/paths">Список путей</a></td>
+        </tr>
+    </table>
+</nav>
+
+
+<article>
+    <h1 align="left">Список путей:</h1> <br />
+    <section>
+        <table border="1">
+            <tr>
+                <td>id</td>
+                <td>atm_one</td>
+                <td>atm_two</td>
+                <td>distance</td>
+                <td>expected</td>
+                <td>dispersion</td>
+            </tr>
+            <tr th:each = "RouteMap : ${routemaps}">
+                <td th:utext="${RouteMap.id}">...</td>
+                <td th:utext="${RouteMap.atmOne}">...</td>
+                <td th:utext="${RouteMap.atmTwo}">...</td>
+                <td th:utext="${RouteMap.distance}">...</td>
+                <td th:utext="${RouteMap.expected}">...</td>
+                <td th:utext="${RouteMap.dispersion}">...</td>
+            </tr>
+        </table>
+    </section>
+    <aside>
+    </aside>
+</article>
+
+<footer>
+    <hr color="black">
+</footer>
+
+</body>
+
+</html>

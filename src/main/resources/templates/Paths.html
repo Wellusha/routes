@@ -5,7 +5,7 @@
 	
 	
 	<head>
-		<title>Список путей</title>
+		<title>Пути</title>
 	</head>
 	
 	
@@ -22,6 +22,7 @@
 				<tr>
 					<td><a href="http://localhost:8080/atms">Список банкоматов</a></td>
 					<td><a href="http://localhost:8080/collectors">Список инкассаторов</a></td>
+					<td><a href="http://localhost:8080/maps">Список карт</a></td>
 				</tr>
 			</table>
 		</nav>
@@ -38,12 +39,12 @@
                     <td>atm_from</td>
                     <td>atm_to</td>
                 </tr>
-                <tr>
-                    <td th:text="'some text'">...</td>
-                    <td th:text="'some text'">...</td>
-                    <td th:text="'some text'">...</td>
-                    <td th:text="'some text'">...</td>
-                    <td th:text="'some text'">...</td>
+                <tr th:each = "Route : ${routes}">
+                    <td th:utext="${Route.id}">...</td>
+                    <td th:utext="${Route.day}">...</td>
+                    <td th:utext="${Route.collector}">...</td>
+                    <td th:utext="${Route.atmFrom}">...</td>
+                    <td th:utext="${Route.atmTo}">...</td>
                 </tr>
             </table>
 		</section>
