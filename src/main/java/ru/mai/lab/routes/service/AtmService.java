@@ -4,6 +4,7 @@ import ru.mai.lab.routes.entity.Atm;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 public interface AtmService {
 
@@ -12,5 +13,7 @@ public interface AtmService {
     }
 
     void saveAll(Collection<Atm> atms);
+
+    List<Atm> getAll();
 
 }

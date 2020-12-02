@@ -1,5 +1,6 @@
 package ru.mai.lab.routes.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,13 +9,20 @@ import ru.mai.lab.routes.entity.Atm;
 import ru.mai.lab.routes.entity.Collector;
 import ru.mai.lab.routes.entity.Route;
 import ru.mai.lab.routes.entity.RouteMap;
+import ru.mai.lab.routes.service.AtmService;
+import ru.mai.lab.routes.service.CollectorService;
+import ru.mai.lab.routes.service.RouteMapService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Controller
+@AllArgsConstructor
 public class ExampleController {
+    private final AtmService atmService;
+    private final CollectorService collectorService;
+    private final RouteMapService routeMapService;
 
     @GetMapping("/example")
     public String example(@RequestParam String exampleString, Model model) {
@@ -24,29 +32,14 @@ public class ExampleController {
 
     @GetMapping("/atms")
     public String atms(Model model) {
-        List<Atm> atms = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Atm atm = new Atm();
-            atm.setId(i);
-            atm.setDispersion((double) i);
-            atm.setExpected((double) i);
-            atm.setIn(i);
-            atm.setOut(i);
-            atms.add(atm);
-        }
+        List<Atm> atms = atmService.getAll();
         model.addAttribute("atms", atms);
         return "ATMs";
     }
 
     @GetMapping("/collectors")
     public String collectors(Model  model) {
-        List<Collector> collectors = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Collector collector = new Collector();
-            collector.setId(i);
-
-            collectors.add(collector);
-        }
+        List<Collector> collectors = collectorService.getAll();
         model.addAttribute("collectors", collectors);
         return "Collectors";
     }
@@ -80,26 +73,7 @@ public class ExampleController {
 
     @GetMapping("/maps")
     public String maps(Model model) {
-        List<RouteMap> routemaps = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Atm a = new Atm();
-            a.setId(i);
-            a.setDispersion((double) i);
-            a.setExpected((double) i);
-            a.setIn(i);
-            a.setOut(i);
-
-            RouteMap routemap = new RouteMap();
-            routemap.setId(i);
-            routemap.setAtmOne(a);
-            routemap.setAtmTwo(a);
-            routemap.setDistance(i);
-            routemap.setExpected((double)i);
-            routemap.setDispersion((double)i);
-
-
-            routemaps.add(routemap);
-        }
+        List<RouteMap> routemaps = routeMapService.getAll();
         model.addAttribute("routemaps", routemaps);
         return "RouteMaps";
     }
