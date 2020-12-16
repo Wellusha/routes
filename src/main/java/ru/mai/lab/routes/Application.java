@@ -9,12 +9,12 @@ import ru.mai.lab.routes.config.CollectorGeneratorConfig;
 import ru.mai.lab.routes.config.RouteMapGeneratorConfig;
 import ru.mai.lab.routes.service.CollectorService;
 import ru.mai.lab.routes.service.RouteMapService;
+import ru.mai.lab.routes.service.RouteService;
 import ru.mai.lab.routes.service.impl.CollectorGeneratorService;
 import ru.mai.lab.routes.service.impl.RouteMapGeneratorService;
 
 @SpringBootApplication
 public class Application {
-
     @Autowired
     private CollectorGeneratorConfig collectorGeneratorConfig;
     @Autowired
@@ -24,6 +24,8 @@ public class Application {
     private CollectorService collectorService;
     @Autowired
     private RouteMapService routeMapService;
+    @Autowired
+    private RouteService routeService;
 
     @Autowired
     private CollectorGeneratorService collectorGenerator;
@@ -34,6 +36,7 @@ public class Application {
     public void init() {
         collectorService.saveAll(collectorGenerator.generate(collectorGeneratorConfig.getCount()));
         routeMapService.saveAll(routeMapGenerator.generate(routeMapGeneratorConfig.getRoutesCount()));
+        routeService.calculateRoutes(10);
     }
 
     public static void main(String[] args) {

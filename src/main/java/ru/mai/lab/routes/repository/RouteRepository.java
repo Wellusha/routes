@@ -4,6 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ru.mai.lab.routes.entity.Route;
 
+import java.util.List;
+
 @Repository
 public interface RouteRepository extends JpaRepository<Route, Integer> {
+    List<Route> findAllByDay(Integer day);
 }
