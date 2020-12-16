@@ -9,9 +9,7 @@ import ru.mai.lab.routes.repository.RouteMapRepository;
 import ru.mai.lab.routes.service.AtmService;
 import ru.mai.lab.routes.service.RouteMapService;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Transactional
 @Service
@@ -28,7 +26,7 @@ public class RouteMapServiceImpl implements RouteMapService {
 
     @Override
     public void saveAll(Collection<RouteMap> routeMaps) {
-        List<Atm> atms = new ArrayList<>();
+        Set<Atm> atms = new HashSet<>();
         for (RouteMap routeMap : routeMaps) {
             atms.add(routeMap.getAtmOne());
             atms.add(routeMap.getAtmTwo());

@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 public class RouteMapGeneratorConfig {
 
     private static final int DEFAULT_ATM_COUNT = 1000;
-    private static final int DEFAULT_ROUTES_COUNT = DEFAULT_ATM_COUNT / 2;
 
     private static final int DEFAULT_MIN_DISTANCE = 1000;
     private static final int DEFAULT_MAX_DISTANCE = 5000;
@@ -40,7 +39,7 @@ public class RouteMapGeneratorConfig {
     }
 
     public Integer getRoutesCount() {
-        return routesCount != null ? routesCount : DEFAULT_ROUTES_COUNT;
+        return routesCount != null ? routesCount : getAtmCount() * getAtmCount();
     }
 
     public Integer getMinDistance() {

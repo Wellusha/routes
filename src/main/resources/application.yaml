@@ -13,6 +13,6 @@ spring:
 app:
   generator:
     route-map:
-      atmCount: 1000
+      atmCount: 10
     collector:
       count: 5
