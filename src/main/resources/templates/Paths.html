@@ -6,6 +6,81 @@
 	
 	<head>
 		<title>Пути</title>
+		<style>
+
+			header{
+				font-family: Arial, Helvetica, sans-serif;
+				color: white;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				background-color: #4CAF50;
+			}
+			ul {
+				font-family: Arial, Helvetica, sans-serif;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				background-color: #333;
+			}
+
+			li {
+				float: left;
+			}
+
+			li a {
+				display: block;
+				color: white;
+				text-align: center;
+				padding: 14px 16px;
+				text-decoration: none;
+			}
+
+			li a:hover {
+				background-color: #111;
+			}
+
+			#customers {
+				font-family: Arial, Helvetica, sans-serif;
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			#customers td, #customers th {
+				border: 1px solid #ddd;
+				padding: 8px;
+			}
+
+			#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+			#customers tr:hover {background-color: #ddd;}
+
+			#customers th {
+				padding-top: 12px;
+				padding-bottom: 12px;
+				text-align: left;
+				background-color: #4CAF50;
+				color: white;
+			}
+
+			.collapsible {
+				background-color: #777;
+				color: white;
+				cursor: pointer;
+				border: none;
+				text-align: left;
+				outline: none;
+			}
+			.active, .collapsible:hover {
+				background-color: #555;
+			}
+
+			.content {
+				display: none;
+				overflow: hidden;
+			}
+		</style>
 	</head>
 	
 	
@@ -18,33 +93,45 @@
 		
 		
 		<nav>
-			<table align="center" border="1">
-				<tr>
-					<td><a href="http://localhost:8080/atms">Список банкоматов</a></td>
-					<td><a href="http://localhost:8080/collectors">Список инкассаторов</a></td>
-					<td><a href="http://localhost:8080/maps">Список карт</a></td>
-				</tr>
-			</table>
+			<ul>
+					<li><a href="http://localhost:8080/atms">Список банкоматов</a></li>
+					<li><a href="http://localhost:8080/collectors">Список инкассаторов</a></li>
+					<li><a href="http://localhost:8080/maps">Список карт</a></li>
+			</ul>
 		</nav>
 		
 		
 		<article>
-		<h1 align="left">Список путей:</h1> <br />
+			<br />
 		<section>
-            <table border="1">
+            <table id="customers">
                 <tr>
-                    <td>id</td>
-                    <td>day</td>
-                    <td>collector</td>
-                    <td>atm_from</td>
-                    <td>atm_to</td>
+                    <th>Route id</th>
+                    <th>Day id</th>
+                    <th>Collector id</th>
+                    <th>Atm from</th>
+                    <th>Atm to</th>
                 </tr>
                 <tr th:each = "Route : ${routes}">
                     <td th:utext="${Route.id}">...</td>
                     <td th:utext="${Route.day}">...</td>
-                    <td th:utext="${Route.collector}">...</td>
-                    <td th:utext="${Route.atmFrom}">...</td>
-                    <td th:utext="${Route.atmTo}">...</td>
+                    <td th:utext="${Route.collector.id}">...</td>
+                    <td>
+						<button type="button" class="collapsible" th:utext="${Route.atmFrom.id}"></button>
+						<div class="content" th:utext="'Note in = ' + ${Route.atmFrom.in} + '<br />' +
+                                                   'Note out = ' + ${Route.atmFrom.out} + '<br />' +
+                                                   'Disper = ' + ${Route.atmFrom.dispersion} + '<br />' +
+                                                   'ExpVal= ' + ${Route.atmFrom.expected}">
+						</div>
+					</td>
+                    <td>
+						<button type="button" class="collapsible" th:utext="${Route.atmTo.id}"></button>
+						<div class="content" th:utext="'Note in = ' + ${Route.atmTo.in} + '<br />' +
+                                                   'Note out = ' + ${Route.atmTo.out} + '<br />' +
+                                                   'Disper = ' + ${Route.atmTo.dispersion} + '<br />' +
+                                                   'ExpVal= ' + ${Route.atmTo.expected}">
+						</div>
+					</td>
                 </tr>
             </table>
 		</section>
@@ -57,5 +144,22 @@
 		</footer>
 		
 	</body>
+
+	<script>
+		var coll = document.getElementsByClassName("collapsible");
+		var i;
+
+		for (i = 0; i < coll.length; i++) {
+			coll[i].addEventListener("click", function() {
+				this.classList.toggle("active");
+				var content = this.nextElementSibling;
+				if (content.style.display === "block") {
+					content.style.display = "none";
+				} else {
+					content.style.display = "block";
+				}
+			});
+		}
+	</script>
 	
 </html>

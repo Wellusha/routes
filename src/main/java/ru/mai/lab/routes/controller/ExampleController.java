@@ -24,11 +24,12 @@ public class ExampleController {
     private final CollectorService collectorService;
     private final RouteMapService routeMapService;
 
+    /*
     @GetMapping("/example")
     public String example(@RequestParam String exampleString, Model model) {
         model.addAttribute("exampleString", exampleString);
         return "example";
-    }
+    }*/
 
     @GetMapping("/atms")
     public String atms(Model model) {

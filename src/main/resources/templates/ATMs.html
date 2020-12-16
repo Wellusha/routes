@@ -6,6 +6,64 @@
 
 	<head>
 		<title>Банкоматы</title>
+		<style>
+
+			header{
+				font-family: Arial, Helvetica, sans-serif;
+				color: white;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				background-color: #4CAF50;
+			}
+			ul {
+				font-family: Arial, Helvetica, sans-serif;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				background-color: #333;
+			}
+
+			li {
+				float: left;
+			}
+
+			li a {
+				display: block;
+				color: white;
+				text-align: center;
+				padding: 14px 16px;
+				text-decoration: none;
+			}
+
+			li a:hover {
+				background-color: #111;
+			}
+
+			#customers {
+				font-family: Arial, Helvetica, sans-serif;
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			#customers td, #customers th {
+				border: 1px solid #ddd;
+				padding: 8px;
+			}
+
+			#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+			#customers tr:hover {background-color: #ddd;}
+
+			#customers th {
+				padding-top: 12px;
+				padding-bottom: 12px;
+				text-align: left;
+				background-color: #4CAF50;
+				color: white;
+			}
+		</style>
 	</head>
 	
 	
@@ -18,26 +76,24 @@
 		
 		
 		<nav>
-			<table align="center" border="1">
-				<tr>
-					<td><a href="http://localhost:8080/collectors">Список инкассаторов</a></td>
-					<td><a href="http://localhost:8080/paths">Список путей</a></td>
-					<td><a href="http://localhost:8080/maps">Список карт</a></td>
-				</tr>
-			</table>
+			<ul>
+					<li><a href="collectors">Список инкассаторов</a></li>
+					<li><a href="paths">Список путей</a></li>
+					<li><a href="maps">Список карт</a></li>
+			</ul>
 		</nav>
 		
 		
 		<article>
-		<h1 align="left">Список банкоматов:</h1> <br />
+			<br/>
 		<section>
-            <table border="1">
+            <table id="customers">
                 <tr>
-                    <td>id</td>
-                    <td>out</td>
-                    <td>in</td>
-                    <td>expected</td>
-                    <td>dispersion</td>
+                    <th>ATM id</th>
+                    <th>Banknote out</th>
+                    <th>Banknote in</th>
+                    <th>Expected value</th>
+                    <th>Dispersion</th>
                 </tr>
                 <tr th:each = "Atm : ${atms}">
                     <td th:utext="${Atm.id}">...</td>
