@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<meta charset="utf8">
+	
+
+	<head>
+		<title>Банкоматы</title>
+		<style>
+
+			header{
+				font-family: Arial, Helvetica, sans-serif;
+				color: white;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				background-color: #4CAF50;
+			}
+			ul {
+				font-family: Arial, Helvetica, sans-serif;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				background-color: #333;
+			}
+
+			li {
+				float: left;
+			}
+
+			li a {
+				display: block;
+				color: white;
+				text-align: center;
+				padding: 14px 16px;
+				text-decoration: none;
+			}
+
+			li a:hover {
+				background-color: #111;
+			}
+
+			#customers {
+				font-family: Arial, Helvetica, sans-serif;
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			#customers td, #customers th {
+				border: 1px solid #ddd;
+				padding: 8px;
+			}
+
+			#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+			#customers tr:hover {background-color: #ddd;}
+
+			#customers th {
+				padding-top: 12px;
+				padding-bottom: 12px;
+				text-align: left;
+				background-color: #4CAF50;
+				color: white;
+			}
+		</style>
+	</head>
+	
+	
+	<body>
+	
+	
+		<header>
+			<h1 align="center">Банкоматы</h1>
+		</header>
+		
+		
+		<nav>
+			<ul>
+					<li><a href="collectors">Список инкассаторов</a></li>
+					<li><a href="paths">Список путей</a></li>
+					<li><a href="maps">Список карт</a></li>
+			</ul>
+		</nav>
+		
+		
+		<article>
+			<br/>
+		<section>
+            <table id="customers">
+                <tr>
+                    <th>ATM id</th>
+                    <th>Banknote out</th>
+                    <th>Banknote in</th>
+                    <th>Expected value</th>
+                    <th>Dispersion</th>
+                </tr>
+                <tr th:each = "Atm : ${atms}">
+                    <td th:utext="${Atm.id}">...</td>
+                    <td th:utext="${Atm.in}">...</td>
+                    <td th:utext="${Atm.out}">...</td>
+                    <td th:utext="${Atm.expected}">...</td>
+                    <td th:utext="${Atm.dispersion}">...</td>
+                </tr>
+            </table>
+		</section>
+		<aside>
+		</aside>
+		</article>
+		
+		<footer>
+            <hr color="black">
+		</footer>
+		
+	</body>
+	
+</html>

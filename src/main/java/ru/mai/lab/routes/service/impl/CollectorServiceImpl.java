@@ -8,6 +8,7 @@ import ru.mai.lab.routes.repository.CollectorRepository;
 import ru.mai.lab.routes.service.CollectorService;
 
 import java.util.Collection;
+import java.util.List;
 
 @Transactional
 @Service
@@ -23,6 +24,11 @@ public class CollectorServiceImpl implements CollectorService {
     @Override
     public void saveAll(Collection<Collector> collectors) {
         repository.saveAll(collectors);
+    }
+
+    @Override
+    public List<Collector> getAll() {
+        return repository.findAll();
     }
 
 }

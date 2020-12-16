@@ -28,5 +28,4 @@ public class Route {
     @OneToOne
     @JoinColumn(name = "atm_to")
     private Atm atmTo;
-
 }

@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<meta charset="utf8">
+
+
+<head>
+    <title>Карты путей</title>
+    <style>
+
+        header{
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #4CAF50;
+        }
+        ul {
+            font-family: Arial, Helvetica, sans-serif;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
+
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;}
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+
+
+        }
+
+        .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            border: none;
+            text-align: left;
+            outline: none;
+        }
+        .active, .collapsible:hover {
+            background-color: #555;
+        }
+
+        .content {
+            display: none;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+<header>
+    <h1 align="center">Карты Путей</h1>
+</header>
+
+
+<nav>
+    <ul>
+            <li><a href="http://localhost:8080/atms">Список банкоматов</a></li>
+            <li><a href="http://localhost:8080/collectors">Список инкассаторов</a></li>
+            <li><a href="http://localhost:8080/paths">Список путей</a></li>
+    </ul>
+</nav>
+
+
+<article>
+    <br />
+    <section>
+        <table id="customers">
+            <tr>
+                <th>Id</th>
+                <th>Atm one id</th>
+                <th>Atm two id</th>
+                <th>distance</th>
+                <th>expected</th>
+                <th>dispersion</th>
+            </tr>
+            <tr th:each = "RouteMap : ${routemaps}">
+                <td th:utext="${RouteMap.id}">...</td>
+                <td>
+                    <button type="button" class="collapsible" th:utext="${RouteMap.atmOne.id}"></button>
+                    <div class="content" th:utext="'Note in = ' + ${RouteMap.atmOne.in} + '<br />' +
+                                                   'Note out = ' + ${RouteMap.atmOne.out} + '<br />' +
+                                                   'Disper = ' + ${RouteMap.atmOne.dispersion} + '<br />' +
+                                                   'ExpVal= ' + ${RouteMap.atmOne.expected}">
+                    </div>
+                </td>
+                <td>
+                    <button type="button" class="collapsible" th:utext="${RouteMap.atmTwo.id}"></button>
+                    <div class="content" th:utext="'Note in = ' + ${RouteMap.atmTwo.in} + '<br />' +
+                                                   'Note out = ' + ${RouteMap.atmTwo.out} + '<br />' +
+                                                   'Disper = ' + ${RouteMap.atmTwo.dispersion} + '<br />' +
+                                                   'ExpVal= ' + ${RouteMap.atmTwo.expected}">">
+                    </div>
+                </td>
+                <td th:utext="${RouteMap.distance}">...</td>
+                <td th:utext="${RouteMap.expected}">...</td>
+                <td th:utext="${RouteMap.dispersion}">...</td>
+            </tr>
+        </table>
+    </section>
+    <aside>
+    </aside>
+</article>
+
+<footer>
+    <hr color="black">
+</footer>
+
+</body>
+
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+</script>
+
+</html>

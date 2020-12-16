@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">	
+	<head>
+		<title>Инкассаторы</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<style>
+
+			header{
+				font-family: Arial, Helvetica, sans-serif;
+				color: white;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				background-color: #4CAF50;
+			}
+			ul {
+				font-family: Arial, Helvetica, sans-serif;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				background-color: #333;
+			}
+
+			li {
+				float: left;
+			}
+
+			li a {
+				display: block;
+				color: white;
+				text-align: center;
+				padding: 14px 16px;
+				text-decoration: none;
+			}
+
+			li a:hover {
+				background-color: #111;
+			}
+
+			#customers {
+				font-family: Arial, Helvetica, sans-serif;
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			#customers td, #customers th {
+				border: 1px solid #ddd;
+				padding: 8px;
+			}
+
+			#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+			#customers tr:hover {background-color: #ddd;}
+
+			#customers th {
+				padding-top: 12px;
+				padding-bottom: 12px;
+				text-align: left;
+				background-color: #4CAF50;
+				color: white;
+			}
+		</style>
+	</head>
+	
+	
+	<body>
+	
+	
+		<header>
+			<h1 align="center">Инкассаторы</h1>
+		</header>
+		
+		
+		<nav>
+			<ul>
+					<li><a href="http://localhost:8080/atms">Список банкоматов</a></li>
+					<li><a href="http://localhost:8080/paths">Список путей</a></li>
+					<li><a href="http://localhost:8080/maps">Список карт</a></li>
+			</ul>
+		</nav>
+		
+		
+		<article>
+			<br />
+		<section>
+            <table id="customers">
+                <tr>
+                    <th>Collector id</th>
+                </tr>
+                <tr th:each = "Collector : ${collectors}">
+                    <td th:utext="${Collector.id}">...</td>
+                </tr>
+            </table>
+		</section>
+		<aside>
+		</aside>
+		</article>	
+		
+		<footer>
+            <hr color="black">
+		</footer>
+		
+	</body>
+	
+</html>

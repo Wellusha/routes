@@ -4,6 +4,7 @@ import ru.mai.lab.routes.entity.RouteMap;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 public interface RouteMapService {
 
@@ -12,5 +13,7 @@ public interface RouteMapService {
     }
 
     void saveAll(Collection<RouteMap> routeMaps);
+
+    List<RouteMap> getAll();
 
 }

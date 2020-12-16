@@ -4,6 +4,7 @@ import ru.mai.lab.routes.entity.Collector;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 public interface CollectorService {
 
@@ -12,5 +13,7 @@ public interface CollectorService {
     }
 
     void saveAll(Collection<Collector> collectors);
+
+    List<Collector> getAll();
 
 }

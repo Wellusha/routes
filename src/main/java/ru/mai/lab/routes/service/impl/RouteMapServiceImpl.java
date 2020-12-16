@@ -38,4 +38,9 @@ public class RouteMapServiceImpl implements RouteMapService {
         repository.saveAll(routeMaps);
     }
 
+    @Override
+    public List<RouteMap> getAll() {
+        return repository.findAll();
+    }
+
 }

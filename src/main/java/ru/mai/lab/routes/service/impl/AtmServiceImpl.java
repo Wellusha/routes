@@ -7,6 +7,7 @@ import ru.mai.lab.routes.repository.AtmRepository;
 import ru.mai.lab.routes.service.AtmService;
 
 import java.util.Collection;
+import java.util.List;
 
 @Transactional
 @Service
@@ -21,6 +22,11 @@ public class AtmServiceImpl implements AtmService {
     @Override
     public void saveAll(Collection<Atm> atms) {
         repository.saveAll(atms);
+    }
+
+    @Override
+    public List<Atm> getAll() {
+        return repository.findAll();
     }
 
 }
