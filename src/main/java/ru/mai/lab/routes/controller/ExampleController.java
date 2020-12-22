@@ -51,26 +51,7 @@ public class ExampleController {
     @GetMapping("/paths")
     public String paths(Model model) {
         List<Route> routes = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Collector col = new Collector();
-            col.setId(i);
 
-            Atm a = new Atm();
-            a.setId(i);
-            a.setDispersion((double) i);
-            a.setExpected((double) i);
-            a.setIn(i);
-            a.setOut(i);
-
-            Route route = new Route();
-            route.setId(i);
-            route.setDay(i);
-            route.setCollector(col);
-            route.setAtmFrom(a);
-            route.setAtmTo(a);
-
-            routes.add(route);
-        }
         model.addAttribute("routes", routes);
         return "Paths";
     }
