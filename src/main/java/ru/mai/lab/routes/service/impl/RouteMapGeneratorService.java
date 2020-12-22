@@ -29,9 +29,37 @@ public class RouteMapGeneratorService extends BaseGeneratorService<RouteMap> {
 
     private void initAtms(AtmGeneratorService atmGenerator) {
         atms.addAll(atmGenerator.generate(config.getAtmCount()));
-        for (Atm atm : atms) {
+        for (int i = 0; i < atms.size(); i++){
+            Atm atm = atms.get(i);
+            atm.setId(i + 1);
+
             atmsStatuses.put(atm, true);
         }
+    }
+
+    @Override
+    public List<RouteMap> generate(int count) {
+        if (count > atms.size() * atms.size()) throw new IllegalArgumentException("ТЫ ЧТО ДУРАК");
+
+        if (count < atms.size() * atms.size()) {
+            return super.generate(count);
+        }
+
+        List<RouteMap> list = new ArrayList<>();
+
+        for (Atm atmOne : atms) {
+            for (Atm atmTwo : atms) {
+                if (atmOne == atmTwo) continue;
+
+                RouteMap map = generate();
+                map.setAtmOne(atmOne);
+                map.setAtmTwo(atmTwo);
+
+                list.add(map);
+            }
+        }
+
+        return list;
     }
 
     @Override
