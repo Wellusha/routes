@@ -27,13 +27,6 @@ public class ExampleController {
     private final RouteMapService routeMapService;
     private final RouteService routeService;
 
-    /*
-    @GetMapping("/example")
-    public String example(@RequestParam String exampleString, Model model) {
-        model.addAttribute("exampleString", exampleString);
-        return "example";
-    }*/
-
     @GetMapping("/atms")
     public String atms(Model model) {
         List<Atm> atms = atmService.getAll();
@@ -50,8 +43,7 @@ public class ExampleController {
 
     @GetMapping("/paths")
     public String paths(Model model) {
-        List<Route> routes = new ArrayList<>();
-
+        List<Route> routes = routeService.getRoutes(null);
         model.addAttribute("routes", routes);
         return "Paths";
     }
@@ -62,14 +54,4 @@ public class ExampleController {
         model.addAttribute("routemaps", routemaps);
         return "RouteMaps";
     }
-
-    @GetMapping("/routes/get")
-    public String getRoutes(@RequestParam(required = false) Integer day, Model model) {
-        List<Route> routes = routeService.getRoutes(day);
-        // возможно, нужно будет использовать как-то по-другому
-        model.addAttribute("routes", routes);
-        // здесь вместо null должно быть имя страницы на thymeleaf
-        return null;
-    }
-
 }

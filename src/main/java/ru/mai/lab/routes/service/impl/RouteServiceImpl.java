@@ -54,7 +54,6 @@ public class RouteServiceImpl implements RouteService {
         Atm atmBufFrom = atms.get(0);
         Atm atmBufTo;
         List<Route> routes = new ArrayList<>();
-        int routeId = 1;
         double workshift = 8;
 
         //Сортировка банкоматов по остальному месту в бункерах, чем меньше места в бункере, тем первее банкоматы стоят в массиве
@@ -70,8 +69,6 @@ public class RouteServiceImpl implements RouteService {
         for(int i = 0; i < collectors.size(); i++) {
             for (int j = 0; j < (atms.size()-1) / collectors.size(); j++) {
                 Route route = new Route();
-                route.setId(routeId);                                                   //ставим id
-                routeId += 1;                                                           //готовим следующий id
                 route.setDay(1);                                                        //устанавливаем день
                 route.setCollector(collectors.get(i));                                  //id инкасатора на этом пути
                 route.setAtmFrom(atmBufFrom);                                           //ставим от какого atm едет инкасатор
@@ -87,34 +84,7 @@ public class RouteServiceImpl implements RouteService {
             atmBufFrom = atms.get(0);   //сбрасываем точку старта для нового инкасатора
             workshift = 8;              //сбрасываем счётчик оставшегося рабочего времени
         }
-        //routeRepository.save(routes);
-        //Необходимые данные висят в переменной routes
-
-        /*List<Collector> collectors = collectorRepository.findAll();
-        List<Atm> atms = atmRepository.findAll();
-        for (int day = 1; day < forDays; day++) {
-            // Тут должен быть расчет маршрута на каждый day
-            // Пока только заглушка
-            for (Collector collector : collectors) {
-                Route route = new Route();
-                route.setAtmFrom(atmRepository.findAll().stream().collect(toShuffledList()).get(0));
-                route.setAtmTo(atmRepository.findAll().stream().collect(toShuffledList()).get(0));
-                route.setCollector(collector);
-                route.setDay(day);
-                routeRepository.save(route);
-            }
-        }*/
-    }
-
-    // для заглушки
-    @SuppressWarnings("unchecked")
-    private static <T> java.util.stream.Collector<T, ?, List<T>> toShuffledList() {
-        java.util.stream.Collector<?, ?, ?> SHUFFLER = Collectors.collectingAndThen(
-                Collectors.toCollection(ArrayList::new),
-                list -> {
-                    Collections.shuffle(list);
-                    return list;
-                });
-        return (java.util.stream.Collector<T, ?, List<T>>) SHUFFLER;
+        routeRepository.saveAll(routes);
+        // Необходимые данные висят в переменной routes
     }
 }
