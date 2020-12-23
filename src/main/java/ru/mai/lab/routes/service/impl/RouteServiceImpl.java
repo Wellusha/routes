@@ -33,14 +33,13 @@ public class RouteServiceImpl implements RouteService {
     }
 
     //функция возвращает время нужное для преодоления расстояния от atmOne до atmTwo
-    public double getTime(int atmOne, int atmTwo) {
+    public double getTime(int atmOne, int atmTwo, List<RouteMap> routeMaps) {
         if(atmOne == 0 || atmTwo == 0)
             return 1;
-        List<RouteMap> routes = routeMapRepository.findAll();
-        for(int i = 0; i < routes.size(); i++) {
-            if (routes.get(i).getAtmOne().getId() == atmOne)
-                if (routes.get(i).getAtmTwo().getId() == atmTwo)
-                    return routes.get(i).getExpected();
+        for (RouteMap routeMap : routeMaps) {
+            if (routeMap.getAtmOne().getId() == atmOne)
+                if (routeMap.getAtmTwo().getId() == atmTwo)
+                    return routeMap.getExpected();
         }
         return 0;
     }
@@ -50,6 +49,7 @@ public class RouteServiceImpl implements RouteService {
 
         List<Atm> atms = atmRepository.findAll();
         List<Collector> collectors = collectorRepository.findAll();
+        List<RouteMap> routeMaps = routeMapRepository.findAll();
 
         Atm atmBufFrom = atms.get(0);
         Atm atmBufTo;
@@ -74,7 +74,7 @@ public class RouteServiceImpl implements RouteService {
                 route.setAtmFrom(atmBufFrom);                                           //ставим от какого atm едет инкасатор
                 atmBufTo = atms.get(collectors.get(i).getId() + j * collectors.size()); //вставляем в буфер atm куда поедет
                 route.setAtmTo(atmBufTo);                                               //вписываем это в таблицу
-                workshift -= getTime(atmBufFrom.getId(), atmBufTo.getId());             //вычитаем время затраченное на поездку из времени рабочего дня
+                workshift -= getTime(atmBufFrom.getId(), atmBufTo.getId(), routeMaps);             //вычитаем время затраченное на поездку из времени рабочего дня
                 atmBufFrom = atms.get(collectors.get(i).getId() + j * collectors.size()); //готовим точку начала для следующей итерации
                 routes.add(route);
 
